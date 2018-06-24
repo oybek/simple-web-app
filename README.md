@@ -20,13 +20,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: oybek
---
-
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -51,7 +44,7 @@ SET default_with_oids = false;
 CREATE TABLE public.readouts (
     date date,
     type character varying,
-    value integer,
+    value real,
     username character varying
 );
 
@@ -86,6 +79,17 @@ CREATE VIEW public.all_readouts AS
 
 
 ALTER TABLE public.all_readouts OWNER TO postgres;
+
+--
+-- Name: types; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.types (
+    type character varying
+);
+
+
+ALTER TABLE public.types OWNER TO postgres;
 
 --
 -- Name: user_roles; Type: TABLE; Schema: public; Owner: postgres
@@ -134,24 +138,18 @@ ALTER TABLE ONLY public.user_roles ALTER COLUMN user_role_id SET DEFAULT nextval
 --
 
 COPY public.readouts (date, type, value, username) FROM stdin;
-2018-06-22	water	123	user
-2018-06-22	energy	12	user
-2018-06-22	water	33	user
-2017-06-23	water	11	user2
-2018-03-13	123	32	user
-2018-03-13	hello	123	user
-2018-03-13	hello	123	user
-2018-03-13	hello	123	user
-2018-02-11	hello	123	user
-2018-03-11	hello	123	user
-2018-02-11	hello	11	user
-2018-02-11	user	11	user
-2222-02-22	adf	123	user
-2222-02-22	какой-то	123	user
-0022-02-22	Вода день ночь	33	user
-2222-02-22	Вода день ночь	123	user
-2018-06-24	Hello	7477	user
-2018-06-14	Hnj	234	user
+\.
+
+
+--
+-- Data for Name: types; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.types (type) FROM stdin;
+Вода
+Отопление
+Эл. энергия день
+Эл. энергия ночь
 \.
 
 
@@ -185,6 +183,14 @@ SELECT pg_catalog.setval('public.user_roles_user_role_id_seq', 4, true);
 
 
 --
+-- Name: types types_type_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.types
+    ADD CONSTRAINT types_type_key UNIQUE (type);
+
+
+--
 -- Name: user_roles user_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -209,6 +215,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: readouts readouts_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.readouts
+    ADD CONSTRAINT readouts_type_fkey FOREIGN KEY (type) REFERENCES public.types(type);
+
+
+--
 -- Name: readouts readouts_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -229,3 +243,4 @@ ALTER TABLE ONLY public.user_roles
 --
 
 ```
+
