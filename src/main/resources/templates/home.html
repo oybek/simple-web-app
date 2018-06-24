@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+<title>Учет показаний</title>
+</head>
+<body class="container">
+    <div class="text-center">
+        <h1>Добрый день это приложение учета показаний!</h1>
+        <form th:action="@{/logout}" method="post">
+            <div class="btn-group-vertical">
+                <a th:href="@{/user}" class="btn btn-primary" role="button" aria-pressed="true">Войти в страницу пользователя</a>
+                <a th:href="@{/admin}" class="btn btn-primary" role="button" aria-pressed="true">Войти в страницу админа</a>
+                <input type="submit" value="Выйти" class="btn btn-primary" role="button" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>

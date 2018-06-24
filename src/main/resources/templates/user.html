@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Учет показаний</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+    <div class="text-center">
+        <h1>Добрый день!</h1>
+
+        <a th:href="@{/}" class="btn btn-primary" role="button">Домой</a>
+
+        <hr/>
+
+        <form action="#" th:action="@{/readout}" th:object="${readout}" method="post">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Тип устройства</th>
+                    <th>Показания</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="date" class="form-control" th:field="*{date}"/></td>
+                    <td><input type="text" class="form-control" th:field="*{type}"/></td>
+                    <td><input type="text" class="form-control" th:field="*{value}"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Добавить показания" class="btn btn-primary" role="button" />
+        </form>
+
+        <hr/>
+
+        <h1>Показания</h1>
+        <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Тип устройства</th>
+            <th>Показания</th>
+          </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="readout : ${readouts}">
+                <tr>
+                    <td type="date" th:text="${readout.date}"></td>
+                    <td th:text="${readout.type}"></td>
+                    <td th:text="${readout.value}"></td>
+                </tr>
+            </th:block>
+        </tbody>
+        </table>
+	</div>
+</body>
+</html>
