@@ -1,6 +1,9 @@
 # simple-web-app
 simple web app, using spring security, mvc postgres jdbc driver (without hibernate), thymeleaf engine
 
+![](https://raw.githubusercontent.com/oybek/simple-web-app/master/gif.gif)
+
+
 ```
 --
 -- PostgreSQL database dump
