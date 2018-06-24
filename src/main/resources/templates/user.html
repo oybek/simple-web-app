@@ -27,9 +27,13 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><input type="date" class="form-control" th:field="*{date}"/></td>
-                    <td><input type="text" class="form-control" th:field="*{type}"/></td>
-                    <td><input type="text" class="form-control" th:field="*{value}"/></td>
+                    <td><input type="date" required="true" class="form-control" th:field="*{date}"/></td>
+                    <td>
+                        <select class="form-control" required="true" th:field="*{type}">
+                            <option th:each="devType : ${devTypes}" th:value="${devType}" th:text="${devType}"></option>
+                        </select>
+                    </td>
+                    <td><input type="number" required="true" step="any" class="form-control" th:field="*{value}"/></td>
                 </tr>
                 </tbody>
             </table>

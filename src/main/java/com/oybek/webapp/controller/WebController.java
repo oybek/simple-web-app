@@ -47,9 +47,9 @@ public class WebController {
     /* It provides list of employees in model object */
     @RequestMapping("/user")
     public String user(Model model, Principal principal) {
-        List<Readout> list = readoutsDao.getReadouts(principal.getName());
         model.addAttribute("readout", new Readout());
-        model.addAttribute("readouts", list);
+        model.addAttribute("readouts", readoutsDao.getReadouts(principal.getName()));
+        model.addAttribute("devTypes", readoutsDao.getAvailabeTypes());
         return "user";
     }
 

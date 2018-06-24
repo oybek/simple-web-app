@@ -23,9 +23,19 @@ public class ReadoutsDao {
     public int save(Readout p){
         String sql = String.format(
                         "insert into readouts(date, type, value, username)" +
-                        "values ('%s', '%s', %d, '%s')",
+                        "values ('%s', '%s', %f, '%s')",
                         p.getDate(), p.getType(), p.getValue(), p.getUsername());
         return template.update(sql);
+    }
+
+    public List<String> getAvailabeTypes() {
+        return template.query(
+                "select type from types",
+                new RowMapper<String>() {
+                    public String mapRow(ResultSet rs, int row) throws SQLException {
+                        return rs.getString("type");
+                    }
+                });
     }
 
     public List<Readout> getReadouts(String username) {
@@ -36,7 +46,7 @@ public class ReadoutsDao {
                         Readout readout = new Readout();
                         readout.setDate(rs.getString("date"));
                         readout.setType(rs.getString("type"));
-                        readout.setValue(rs.getInt("value"));
+                        readout.setValue(rs.getDouble("value"));
                         return readout;
                     }
                 });
@@ -51,7 +61,7 @@ public class ReadoutsDao {
                         readout.setUsername(rs.getString("username"));
                         readout.setDate(rs.getString("date"));
                         readout.setType(rs.getString("type"));
-                        readout.setValue(rs.getInt("value"));
+                        readout.setValue(rs.getDouble("value"));
                         return readout;
                     }
                 });

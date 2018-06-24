@@ -3,7 +3,7 @@ package com.oybek.webapp.entities;
 public class Readout {
     String date;
     String type;
-    Integer value;
+    Double value;
     String username;
 
     public String getDate() {
@@ -22,11 +22,11 @@ public class Readout {
         this.type = type;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
