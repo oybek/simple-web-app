@@ -2,6 +2,7 @@ package com.oybek.webapp.controller;
 
 import com.oybek.webapp.ReadoutsDao;
 import com.oybek.webapp.entities.Readout;
+import com.oybek.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class WebController {
 
     @Autowired
     ReadoutsDao readoutsDao;
+
+    @Autowired
+    UserService userService;
    
     @RequestMapping(value="/")
     public String home(){
@@ -56,7 +60,7 @@ public class WebController {
     @PostMapping("/readout")
     public RedirectView submitReadout(@ModelAttribute Readout readout, Principal principal) {
         // add to readout the authorized user's name
-        readout.setUsername(principal.getName());
+        readout.setUserlogin(userService.findByLogin(principal.getName()));
         // save readout to db
         readoutsDao.save(readout);
         return new RedirectView("user");

@@ -1,10 +1,31 @@
 package com.oybek.webapp.entities;
 
+import javax.persistence.*;
+
+@Entity
 public class Readout {
-    String date;
-    String type;
-    Double value;
-    String username;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String date;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Type type;
+
+    private Double value;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private User userlogin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDate() {
         return date;
@@ -14,11 +35,11 @@ public class Readout {
         this.date = date;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -30,11 +51,11 @@ public class Readout {
         this.value = value;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUserlogin() {
+        return userlogin;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserlogin(User userlogin) {
+        this.userlogin = userlogin;
     }
 }
