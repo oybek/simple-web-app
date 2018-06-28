@@ -2,23 +2,6 @@
 # = Hibernate datasource
 # ===============================
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost/postgres
-    username: postgres
-    password:
-
-# ===============================
-# = JPA configurations
-# ===============================
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: POSTGRES
-    properties:
-      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
-
-spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -26,9 +9,9 @@ spring:
       ddl-auto: create-drop
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/mydb
-    username: foo
-    password: bar
+    url: jdbc:postgresql://localhost/postgres
+    username: postgres
+    password:
     driverClassName: org.postgresql.Driver
 
 # ===============================
